@@ -3,8 +3,10 @@ html
     head
         title 12d
         meta(name="viewport",content="width=device-width,initial-scale=1,user-scalable=no")
-        != getBlock("styles").add(["css/style.css"]).toHTML()
+        != getBlock("styles").add(["css/style.css","vendor/flipclock/flipclock.css"]).toHTML()
 
     body
 
         != content
+
+        != getBlock("scripts").add(["vendor/jquery-1.10.1.min.js","vendor/knockout-2.2.1.js","vendor/flipclock/flipclock.min.js","js/app.js"]).toHTML()
