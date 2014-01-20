@@ -63,3 +63,8 @@ min 12
 
 others
  - i'm terrible at organising myself (so no more freelance)
+
+
+ Flipclock by Justin Kimbrell / Objective HTML / flipclockjs.com
+
+ Train pic: Hugh Griffith Roberts / http://www.flickr.com/photos/abermaw/11985281293/
