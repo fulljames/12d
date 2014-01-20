@@ -1,8 +1,8 @@
 $ ->
-#  countdown = 240
-  countdown = 720
+  countdown = 48
+#  countdown = 720
   slides = 12
-  secondary = 4
+  secondary = 2
 
   interval = countdown / slides
   subInterval = interval / secondary
@@ -27,8 +27,9 @@ $ ->
 
           next = $slides.find('li.new:eq(0)')
 
-          next.removeClass 'new'
-          $.scrollTo next, { duration: 400 }
+          if next.length
+            next.removeClass 'new'
+            $.scrollTo next, { duration: 400 }
 
         if (clock.getTime().time - (subInterval)) % interval is 0
           console.log "#{clock.getTime().time} sub-transition"
