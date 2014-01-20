@@ -1,7 +1,7 @@
 $ ->
   countdown = 240
 #  countdown = 720
-  slides = 24
+  slides = 12
 
   interval = countdown / slides
 
@@ -18,6 +18,7 @@ $ ->
       start: -> console.log 'clock start'
       stop: -> console.log 'clock stop'
       interval: ->
+
         if clock.getTime().time % interval is 0
           console.log "#{clock.getTime().time} transition"
 
@@ -25,6 +26,12 @@ $ ->
 
           next.removeClass 'new'
           $.scrollTo next, { duration: 400 }
+
+        if (clock.getTime().time - (interval/4)) % interval is 0
+          console.log "#{clock.getTime().time} sub-transition"
+
+          next = $slides.find('.sub:eq(0)')
+          next.removeClass 'sub'
 
   $(window).on 'resize', -> setSlideHeight $slides
 

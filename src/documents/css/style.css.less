@@ -1,8 +1,8 @@
 body {
   font-family: NexaBook, sans-serif;
   margin: 0;
-  background-color: #ff0;
-//  background-color: #fff;
+//  background-color: #ff0;
+  background-color: #fff;
 
   text-align: center;
 }
@@ -32,15 +32,27 @@ h1,h2,h3,h4,h5,h6,strong {
 
   li {
     visibility: visible;
+    position: relative;
 
     &.new {
       visibility: hidden;
     }
 
     .inner {
-      position: relative;
+      position: absolute;
       top: 50%;
       -webkit-transform: translateY(-50%);
+
+      width: 100%;
+      opacity: 1;
+
+      transition: opacity 0.4s;
+
+      &.sub {
+        opacity: 0;
+
+        transition: opacity 0.4s;
+      }
     }
   }
 }
@@ -57,4 +69,9 @@ h1,h2,h3,h4,h5,h6,strong {
   &.train {
     background-image: url(/images/train.jpg);
   }
+}
+
+// individual slide styles
+.s2 {
+  background-color: #fff;
 }
