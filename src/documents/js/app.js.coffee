@@ -24,7 +24,7 @@ $ ->
           next = $slides.find('li.new:eq(0)')
 
           next.removeClass 'new'
-          $.scrollTo next
+          $.scrollTo next, { duration: 400 }
 
   $(window).on 'resize', -> setSlideHeight $slides
 
