@@ -4,12 +4,10 @@ $ ->
 
   interval = countdown / slides
 
-  console.log "interval is #{interval} seconds"
+#  console.log "interval is #{interval} seconds"
 
   $slides = $ '.slides'
-
-#  _(slides).times (n) ->
-#    $slides.append "<li class='new'>#{n}</li>"
+  setSlideHeight $slides
 
   clock = $('.clock').FlipClock countdown,
     countdown: true
@@ -22,12 +20,23 @@ $ ->
         if clock.getTime().time % interval is 0
           console.log "#{clock.getTime().time} transition"
 
-          $slides.find('li.new:eq(0)').removeClass 'new'
+          next = $slides.find('li.new:eq(0)')
+          pos = next.offset().top
+
+          next.removeClass 'new'
+          window.scrollTo 0, pos
+
+  $(window).on 'resize', -> setSlideHeight $slides
 
   $(window).on 'keyup', (e) ->
-    return unless e.which is 32
+    return unless e.which is 39
 
     if clock.running
       clock.stop()
     else
       clock.start()
+
+
+setSlideHeight = (slides) ->
+  availableHeight = window.innerHeight
+  slides.find('li').css('height',availableHeight)
