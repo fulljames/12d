@@ -1,11 +1,14 @@
 $ ->
-  countdown = 240
-#  countdown = 720
+#  countdown = 240
+  countdown = 720
   slides = 12
+  secondary = 4
 
   interval = countdown / slides
+  subInterval = interval / secondary
 
   console.log "interval is #{interval} seconds"
+  console.log "subtransition is #{subInterval} seconds"
 
   $slides = $ '.slides'
   setSlideHeight $slides
@@ -27,7 +30,7 @@ $ ->
           next.removeClass 'new'
           $.scrollTo next, { duration: 400 }
 
-        if (clock.getTime().time - (interval/4)) % interval is 0
+        if (clock.getTime().time - (subInterval)) % interval is 0
           console.log "#{clock.getTime().time} sub-transition"
 
           next = $slides.find('.sub:eq(0)')
