@@ -1,13 +1,15 @@
 $ ->
   countdown = 720
-  slides = 36
+  slides = 24
 
   interval = countdown / slides
 
+  console.log "interval is #{interval} seconds"
+
   $slides = $ '.slides'
 
-  _(slides).times (n) ->
-    $slides.append "<li class='new'>#{n}</li>"
+#  _(slides).times (n) ->
+#    $slides.append "<li class='new'>#{n}</li>"
 
   clock = $('.clock').FlipClock countdown,
     countdown: true
