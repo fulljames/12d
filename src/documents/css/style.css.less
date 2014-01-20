@@ -3,6 +3,8 @@ body {
   margin: 0;
   background-color: #ff0;
 //  background-color: #fff;
+
+  text-align: center;
 }
 
 h1,h2,h3,h4,h5,h6,strong {
@@ -10,6 +12,7 @@ h1,h2,h3,h4,h5,h6,strong {
   font-weight: normal;
 }
 
+// flipclock.js over-rides
 .flip-clock-wrapper {
   width: auto;
   position: fixed;
@@ -21,6 +24,7 @@ h1,h2,h3,h4,h5,h6,strong {
   display: none;
 }
 
+// slide styling
 .slides {
   list-style: none;
   margin: 0;
@@ -38,5 +42,19 @@ h1,h2,h3,h4,h5,h6,strong {
       top: 50%;
       -webkit-transform: translateY(-50%);
     }
+  }
+}
+
+// image sizing and positioning
+.pic {
+  background: no-repeat center bottom;
+  background-size: cover;
+  height: 100%;
+
+  &.sundial {
+    background-image: url(/images/sundial.jpg);
+  }
+  &.train {
+    background-image: url(/images/train.jpg);
   }
 }
