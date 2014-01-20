@@ -5,7 +5,7 @@ body {
 //  background-color: #fff;
 }
 
-strong {
+h1,h2,h3,h4,h5,h6,strong {
   font-family: NexaBlack;
   font-weight: normal;
 }
@@ -27,12 +27,16 @@ strong {
   padding: 0;
 
   li {
-
-    min-height: 20em;
     visibility: visible;
 
     &.new {
       visibility: hidden;
+    }
+
+    .inner {
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
     }
   }
 }
