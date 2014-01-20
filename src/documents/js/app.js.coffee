@@ -1,10 +1,11 @@
 $ ->
-  countdown = 720
+  countdown = 240
+#  countdown = 720
   slides = 24
 
   interval = countdown / slides
 
-#  console.log "interval is #{interval} seconds"
+  console.log "interval is #{interval} seconds"
 
   $slides = $ '.slides'
   setSlideHeight $slides
@@ -21,10 +22,9 @@ $ ->
           console.log "#{clock.getTime().time} transition"
 
           next = $slides.find('li.new:eq(0)')
-          pos = next.offset().top
 
           next.removeClass 'new'
-          window.scrollTo 0, pos
+          $.scrollTo next
 
   $(window).on 'resize', -> setSlideHeight $slides
 
