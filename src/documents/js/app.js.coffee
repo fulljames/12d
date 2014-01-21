@@ -1,10 +1,10 @@
 $ ->
   $.scrollTo "0px", "0px"
 
-  countdown = 48
-#  countdown = 720
+#  countdown = 48
+  countdown = 720
   slides = 12
-  secondary = 2
+  secondary = 4
 
   interval = countdown / slides
   subInterval = interval / secondary
