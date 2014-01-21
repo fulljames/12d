@@ -61,4 +61,4 @@ setElementHeights = (slides, start, stop) ->
   start.css('line-height',"#{availableHeight}px")
   stop.css('height',availableHeight)
 
-  $('h1').fitText 1.2, {maxFontSize: '60px'}
+  $('h1').fitText 1.2, {maxFontSize: '70px'}
