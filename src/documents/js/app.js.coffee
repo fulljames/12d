@@ -63,15 +63,49 @@ setElementHeights = (slides, start, stop, charts) ->
   stop.css('height',availableHeight)
   charts.css('height',availableHeight-200)
 
-  makeChart()
+  makeTechChart()
+  makeWorkChart()
   $('h1').fitText 1.2, {maxFontSize: '70px'}
 
-
-makeChart = ->
+makeWorkChart = ->
   AmCharts.ready ->
     # SERIAL CHART
     chart = new AmCharts.AmSerialChart()
-    chart.dataProvider = chartData
+    chart.dataProvider = workChartData
+    chart.categoryField = "year"
+    chart.handDrawn = true
+    chart.handDrawnThickness = 15
+
+    # AXES
+    # Category
+    categoryAxis = chart.categoryAxis
+    categoryAxis.gridAlpha = 0.07
+    categoryAxis.axisColor = "#DADADA"
+    categoryAxis.startOnAxis = true
+
+    # Value
+    valueAxis = new AmCharts.ValueAxis()
+    # this line makes the chart "stacked"
+    valueAxis.gridAlpha = 0.07
+    chart.addValueAxis(valueAxis)
+
+    #GRAPH
+    graph = new AmCharts.AmGraph()
+    graph.type = "line"
+    graph.title = "Interest"
+    graph.valueField = "interest"
+    graph.lineAlpha = 1
+    graph.fillAlphas = 0.0
+    chart.addGraph graph
+
+    # WRITE
+    chart.write "workchart"
+
+makeTechChart = ->
+  AmCharts.ready ->
+    # SERIAL CHART
+    chart = new AmCharts.AmSerialChart()
+    chart.dataProvider = techChartData
     chart.categoryField = "year"
 
     # AXES
@@ -89,117 +123,19 @@ makeChart = ->
     chart.addValueAxis(valueAxis)
 
     # GRAPHS
-    graph = new AmCharts.AmGraph()
-    graph.type = "line" # it's simple line graph
-    graph.title = "HTML"
-    graph.valueField = "html"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6 # setting fillAlphas to > 0 value makes it area graph
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "CSS"
-    graph.valueField = "css"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Javascript"
-    graph.valueField = "js"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "DHTML"
-    graph.valueField = "dhtml"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Cold Fusion"
-    graph.valueField = "cfm"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "PHP"
-    graph.valueField = "php"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "ASP"
-    graph.valueField = "asp"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "ASP.net"
-    graph.valueField = "aspnet"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Node.js"
-    graph.valueField = "node"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Rails"
-    graph.valueField = "rails"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Prototype"
-    graph.valueField = "prototype"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "jQuery"
-    graph.valueField = "jq"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Knockout"
-    graph.valueField = "knockout"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
-
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Backbone"
-    graph.valueField = "backbone"
-    graph.lineAlpha = 0
-    graph.fillAlphas = 0.6
-    chart.addGraph(graph)
+    chart.addGraph createGraph("HTML","html")
+    chart.addGraph createGraph("CSS","css")
+    chart.addGraph createGraph("JS","js")
+    chart.addGraph createGraph("Cold Fusion","cfm")
+    chart.addGraph createGraph("PHP","php")
+    chart.addGraph createGraph("ASP","asp")
+    chart.addGraph createGraph("ASP.net","aspnet")
+    chart.addGraph createGraph("Node","node")
+    chart.addGraph createGraph("Rails","rails")
+    chart.addGraph createGraph("Prototype","prototype")
+    chart.addGraph createGraph("jQuery","jq")
+    chart.addGraph createGraph("Knockout","knockout")
+    chart.addGraph createGraph("Backbone","backbone")
 
     # LEGEND
     legend = new AmCharts.AmLegend()
@@ -211,9 +147,19 @@ makeChart = ->
     chart.addLegend(legend)
 
     # WRITE
-    chart.write "chartdiv"
+    chart.write "techchart"
 
-chartData = [{
+createGraph = (title, field) ->
+  graph = new AmCharts.AmGraph()
+  graph.type = "line"
+  graph.title = title
+  graph.valueField = field
+  graph.lineAlpha = 0.8
+  graph.fillAlphas = 0.6
+
+  graph
+
+techChartData = [{
   "year": "1995",
   "html": 100,
   "css": 0,
@@ -359,7 +305,7 @@ chartData = [{
   "css": 14,
   "js": 14,
   "php": 0,
-  "aspnet": 14,
+  "aspnet": 0,
   "node": 14,
   "rails": 0,
   "jq": 14,
@@ -370,7 +316,6 @@ chartData = [{
   "html": 12,
   "css": 12,
   "js": 12,
-  "aspnet": 0,
   "node": 12,
   "rails": 12,
   "jq": 12,
@@ -387,3 +332,62 @@ chartData = [{
   "knockout": 12,
   "backbone": 12
 }];
+
+workChartData = [{
+  "year": "1995",
+  "interest": 9
+}, {
+  "year": "1996",
+  "interest": 9
+}, {
+  "year": "1997",
+  "interest": 9
+}, {
+  "year": "1998",
+  "interest": 8
+}, {
+  "year": "1999",
+  "interest": 6
+}, {
+  "year": "2000",
+  "interest": 5
+}, {
+  "year": "2001",
+  "interest": 4
+}, {
+  "year": "2002",
+  "interest": 8
+}, {
+  "year": "2003",
+  "interest": 7
+}, {
+  "year": "2004",
+  "interest": 8
+}, {
+  "year": "2005",
+  "interest": 6
+}, {
+  "year": "2006",
+  "interest": 5
+}, {
+  "year": "2007",
+  "interest": 4
+}, {
+  "year": "2008",
+  "interest": 9
+}, {
+  "year": "2009",
+  "interest": 6
+}, {
+  "year": "2010",
+  "interest": 4
+}, {
+  "year": "2011",
+  "interest": 9
+}, {
+  "year": "2012",
+  "interest": 4
+}, {
+  "year": "2013",
+  "interest": 7
+}]
