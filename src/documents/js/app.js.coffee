@@ -17,7 +17,7 @@ $ ->
   $stop = $ '.stop'
   $charts = $ '.chart'
 
-  setElementHeights $slides, $start, $stop, $charts
+  setupElements $slides, $start, $stop, $charts
 
   clock = $('.clock').FlipClock countdown,
     countdown: true
@@ -45,7 +45,7 @@ $ ->
           next = $slides.find('.sub:eq(0)')
           next.removeClass 'sub'
 
-  $(window).on 'resize', -> setElementHeights $slides, $start, $stop, $charts
+  $(window).on 'resize', -> setupElements $slides, $start, $stop, $charts
 
   $(window).on 'keyup', (e) ->
     return unless e.which is 39
@@ -55,8 +55,7 @@ $ ->
     else
       clock.start()
 
-
-setElementHeights = (slides, start, stop, charts) ->
+setupElements = (slides, start, stop, charts) ->
   availableHeight = window.innerHeight
   slides.css('margin-top',availableHeight).find('li').css('height',availableHeight)
   start.css('line-height',"#{availableHeight}px")
@@ -84,19 +83,10 @@ makeWorkChart = ->
     categoryAxis.startOnAxis = true
 
     # Value
-    valueAxis = new AmCharts.ValueAxis()
-    # this line makes the chart "stacked"
-    valueAxis.gridAlpha = 0.07
-    chart.addValueAxis(valueAxis)
+    chart.addValueAxis createValueAxis false
 
     #GRAPH
-    graph = new AmCharts.AmGraph()
-    graph.type = "line"
-    graph.title = "Interest"
-    graph.valueField = "interest"
-    graph.lineAlpha = 1
-    graph.fillAlphas = 0.0
-    chart.addGraph graph
+    chart.addGraph createGraph("Interest","interest",1,0)
 
     # WRITE
     chart.write "workchart"
@@ -116,11 +106,7 @@ makeTechChart = ->
     categoryAxis.startOnAxis = true
 
     # Value
-    valueAxis = new AmCharts.ValueAxis()
-    # this line makes the chart "stacked"
-    valueAxis.stackType = "100%"
-    valueAxis.gridAlpha = 0.07
-    chart.addValueAxis(valueAxis)
+    chart.addValueAxis createValueAxis true
 
     # GRAPHS
     chart.addGraph createGraph("HTML","html")
@@ -149,13 +135,20 @@ makeTechChart = ->
     # WRITE
     chart.write "techchart"
 
-createGraph = (title, field) ->
+createValueAxis = (stacked) ->
+  valueAxis = new AmCharts.ValueAxis()
+  valueAxis.stackType = "100%" if stacked
+  valueAxis.gridAlpha = 0.07
+
+  valueAxis
+
+createGraph = (title, field, line = 0.8, fill = 0.6) ->
   graph = new AmCharts.AmGraph()
   graph.type = "line"
   graph.title = title
   graph.valueField = field
-  graph.lineAlpha = 0.8
-  graph.fillAlphas = 0.6
+  graph.lineAlpha = line
+  graph.fillAlphas = fill
 
   graph
 
