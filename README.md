@@ -78,22 +78,20 @@ min 7
  - because I'm lazy
  - but i don't feel like i've mastered it, and
 
- - i know some people don't like it because they feel that front end 
+ - i know some people don't like it because they feel that front end
 
  - is it a good idea? oh god i don't know
 
 
 min 8
- - burnout / imposter syndrome?
+ - Train pic: Hugh Griffith Roberts / http://www.flickr.com/photos/abermaw/11985281293/
+ - there is always a way
 
 min 9
- - making your slides in HTML always sounds like a good idea
- - it never is (hopefully its still working by this point)
- - but it is still less of a horror show than trying to learn powerpoint
+ - get another pair of eyes on it
 
 min 10
- - learning how to say no
- - trusting your instinctive judgement
+ - you are not an imposter
 
 min 11
  - don't get acquired
@@ -102,13 +100,8 @@ min 11
 min 12
  - If you don't love it, don't do it
  - career interest graph
- - end / contacts
+
+end
 
 
-others
- - i'm terrible at organising myself (so no more freelance)
-
-
- Flipclock by Justin Kimbrell / Objective HTML / flipclockjs.com
-
- Train pic: Hugh Griffith Roberts / http://www.flickr.com/photos/abermaw/11985281293/
+ - Flipclock by Justin Kimbrell / Objective HTML / flipclockjs.com
